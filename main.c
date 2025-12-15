@@ -1,9 +1,10 @@
 #include "push_swap.h"
 #include "libft/libft.h"
+#include "ft_printf/ft_printf.h"
 
 void	ft_free_content(void *content)
 {
-	free(content);
+	// free(content);
 }
 
 int ft_check_is_valid_ints(char ***ints, t_list **head)
@@ -22,10 +23,10 @@ int ft_check_is_valid_ints(char ***ints, t_list **head)
 			nb = ft_atoi(ints[j][i], &is_valid);
 			if (is_valid)
 			{
-				ft_lstadd_back(*head, ft_lstnew((void*) &nb));
+				ft_lstadd_back(head, ft_lstnew((void*) &nb));
 			}
 			else
-				return (ft_lstclear(&head, ft_free_content), 0);
+				return (ft_lstclear(head, ft_free_content), 0);
 			i++;
 		}
 		j++;
@@ -40,7 +41,7 @@ int	ft_check_repeat(t_list *head)
 	t_list *tmp;
 
 	if (!head)
-		return ;
+		return (1);
 	tmp = head;
 	head = head->next;
 	while (head)
@@ -82,11 +83,13 @@ int main(int ac, char **av)
 {
 	t_list *head;
 
+	head = NULL;
 	if (ac > 1)
 	{
 		if (!ft_check_is_valid_input(ac, av, &head))
 			return (ft_putstr_fd("Error\n", 2), (1));
 		ft_lstshow(head);
+		
 	}
 	return (0);
 }
