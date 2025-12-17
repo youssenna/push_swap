@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 21:38:53 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/14 18:14:50 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:09:45 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_check_is_valid_int(const char *str, int i, long *result, int *is_valid)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		*result = *result * 10 + (str[i] - '0');
+		if (*result > 2147483648)
+			*is_valid = 0;
 		i++;
 	}
 	if (str[i] != '\0')

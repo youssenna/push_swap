@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 13:23:53 by yousenna          #+#    #+#             */
-/*   Updated: 2025/10/22 22:59:48 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/16 21:41:18 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_next_word_len(char const *str, int *str_index, char c)
 	return (len);
 }
 
-void	free_last_2darr_alloc(char **strs, int index)
+void	free_2d_arr(char **strs, int index)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ char	**ft_split(char const *s, char c)
 		strs[i] = ft_substr(s, s_index - next_word_len, next_word_len);
 		if (!strs[i])
 		{
-			free_last_2darr_alloc(strs, i);
+			free_2d_arr(strs, i);
 			return (NULL);
 		}
 		i++;
