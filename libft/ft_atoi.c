@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 21:38:53 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/16 18:09:45 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/17 10:08:00 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ long	ft_atoi(const char *str, int *is_valid_int)
 			sign *= -1;
 		i++;
 	}
+	if (str[i] == '\0')
+		return (*is_valid_int = 0, 0);
 	ft_check_is_valid_int(str, i, &result, is_valid_int);
 	if (sign * result > 2147483647 || sign * result < -2147483648)
 		*is_valid_int = 0;

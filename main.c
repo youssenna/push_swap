@@ -2,49 +2,20 @@
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
 
-int ft_check_is_valid_ints(char ***ints, t_list **head)
-{
-	int i;
-	int j;
-	int nb;
-	int is_valid;
-	t_list *node;
-	
-	j = 0;
-	while (ints[j])
-	{
-		i = 0;
-		while (ints[j][i])
-		{
-			nb = ft_atoi(ints[j][i], &is_valid);
-			node = ft_lstnew(nb);
-			if (!node || !is_valid)
-				return (free(node), ft_lstclear(head), 0);
-			ft_lstadd_back(head, node);
-			free(ints[j][i]);
-			i++;
-		}
-		free(ints[j]);
-		j++;
-	}
-	return (free(ints), 1);
-}
-
-void	ft_check_is_valid_int(char *str, int i, long *result, int *is_valid);
-
 int	ft_check_repeat(t_list *head)
 {
-	int nb;
-	t_list *tmp;
+	t_list	*tmp;
+	t_list	*stock_head;
 
+	stock_head = head;
 	if (!head)
-		return (1);
+		return (0);
 	tmp = head;
 	head = head->next;
 	while (head)
 	{
 		if (head->content == tmp->content)
-			return (ft_lstclear(&head), 1);
+			return (ft_lstclear(&stock_head), 1);
 		head = head->next;
 		if (head == NULL && tmp->next != NULL)
 		{
@@ -55,16 +26,19 @@ int	ft_check_repeat(t_list *head)
 	return (0);
 }
 
-int	ft_push_back(int **ints, t_list **head)
+// her I push to the stack and I check is valid int on the 2_d array 
+// that's split return
+int	ft_push_back(char **ints, t_list **head)
 {
-	char	*stock_add;
 	int		nb;
 	t_list	*node;
 	int		is_valid;
+	int		i;
 
-	while (*ints)
+	i = 0;
+	while (ints[i] && *ints[i])
 	{
-		nb = ft_atoi(*ints, &is_valid);
+		nb = ft_atoi(ints[i], &is_valid);
 		node = ft_lstnew(nb);
 		if (!node || !is_valid)
 		{
@@ -73,48 +47,49 @@ int	ft_push_back(int **ints, t_list **head)
 			return (ft_lstclear(head), 0);
 		}
 		ft_lstadd_back(head, node);
-		stock_add = *ints;
-		(*ints)++;
-		free(stock_add);
+		i++;
 	}
-	return (free(ints), 1);
+	return (1);
 }
 
 int	ft_check_is_valid_input(int ac, char **av, t_list **head)
 {
-	size_t	i;
+	int	i;
 	char	**ints;
 
-	if (!ints)
-		return (free(ints), 0);
 	i = 0;
 	while (i < ac - 1)
 	{
-		ints = ft_split(av[i + 1], ' ');
-		if (!ints)
-			return (0);
-		ft_push_back(ints, head);
+		ints = ft_split(av[i + 1], " \t\n\v\f\r");
+		if (!ints || !ints[0])
+			return (ft_lstclear(head), free(ints), 0);
+		if (!ft_push_back(ints, head))
+			return (free_2d_arr(ints) ,0);
+		if (ft_check_repeat(*head))
+			return (free_2d_arr(ints), 0);
+		free_2d_arr(ints);
 		i++;
 	}
-	ints[i] = NULL;
-	if (!ft_check_is_valid_ints(ints, head))
-		return (ft_lstclear(head), 0);
-	if (ft_check_repeat(*head))
-		return (ft_lstclear(head), 0);
 	return (1);
 }
 
 int main(int ac, char **av)
 {
-	t_list *head;
+	t_list *stack_a;
+	t_list *stack_b;
 
-	head = NULL;
+	stack_a = NULL;
 	if (ac > 1)
 	{
-		if (!ft_check_is_valid_input(ac, av, &head))
+		if (!ft_check_is_valid_input(ac, av, &stack_a))
 			return (ft_putstr_fd("Error\n", 2), (1));
-		ft_lstshow(head);
-		// ft_lstclear(&head);
+
+		ft_sort_stack_a(&stack_a, &stack_b);
+	// ft_printf("\n------stack a-----------\n");
+	// ft_lstshow(stack_a);
+	// ft_sort_stack_a(&stack_a, &stack_b);
+	// ft_printf("\n------stack a after sort 3 number-----------\n");
+	// ft_lstshow(stack_a);
 		
 	}
 	return (0);
@@ -123,6 +98,7 @@ int main(int ac, char **av)
 
 // a.out " 25 762 836" "   187" " 98 38 -97"
 
-// a -3 1 2
+// a 
+// 3 1 2
 
 // b 2 1 -3

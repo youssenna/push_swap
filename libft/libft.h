@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:55:47 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/16 21:41:06 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/22 05:08:04 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@
 typedef struct s_list
 {
 	int				content;
+	int				index;
 	struct s_list	*next;
+	struct s_list	*target;
+	int				cost_a;
+	int				cost_b;
+	int				total_cost;
 }					t_list;
 
 int					ft_isalnum(int c);
@@ -59,7 +64,7 @@ char				*ft_strdup(const char *str);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
-char				**ft_split(char const *s, char c);
+char				**ft_split(char const *s, char *sep);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -74,6 +79,6 @@ t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstclear(t_list **lst);
 void				ft_lstdelone(t_list *lst);
-void				free_2d_arr(char **strs, int index);
+void				free_2d_arr(char **strs);
 
 #endif

@@ -6,18 +6,27 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 13:23:53 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/16 21:41:18 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/17 10:27:28 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_is_2char_equal(char c1, char c2)
+int	ft_is_2char_equal(char c1, char *str)
 {
-	return (c1 == c2);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c1)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-size_t	ft_count_words(char const *str, char c)
+size_t	ft_count_words(char const *str, char *sep)
 {
 	size_t	words;
 	int		i;
@@ -26,26 +35,26 @@ size_t	ft_count_words(char const *str, char c)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] && ft_is_2char_equal(str[i], c))
+		while (str[i] && ft_is_2char_equal(str[i], sep))
 			i++;
 		if (str[i])
 			words++;
-		while (str[i] && !ft_is_2char_equal(str[i], c))
+		while (str[i] && !ft_is_2char_equal(str[i], sep))
 			i++;
-		while (str[i] && ft_is_2char_equal(str[i], c))
+		while (str[i] && ft_is_2char_equal(str[i], sep))
 			i++;
 	}
 	return (words);
 }
 
-int	ft_next_word_len(char const *str, int *str_index, char c)
+int	ft_next_word_len(char const *str, int *str_index, char *sep)
 {
 	int	len;
 
 	len = 0;
-	while (str[*str_index] && ft_is_2char_equal(str[*str_index], c))
+	while (str[*str_index] && ft_is_2char_equal(str[*str_index], sep))
 		(*str_index)++;
-	while (str[*str_index] && !ft_is_2char_equal(str[*str_index], c))
+	while (str[*str_index] && !ft_is_2char_equal(str[*str_index], sep))
 	{
 		len++;
 		(*str_index)++;
@@ -53,12 +62,12 @@ int	ft_next_word_len(char const *str, int *str_index, char c)
 	return (len);
 }
 
-void	free_2d_arr(char **strs, int index)
+void	free_2d_arr(char **strs)
 {
 	int	i;
 
 	i = 0;
-	while (i < index)
+	while (strs[i])
 	{
 		free(strs[i]);
 		i++;
@@ -66,7 +75,7 @@ void	free_2d_arr(char **strs, int index)
 	free(strs);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *sep)
 {
 	char	**strs;
 
@@ -74,7 +83,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	int next_word_len, (s_index);
-	words_count = ft_count_words(s, c);
+	words_count = ft_count_words(s, sep);
 	strs = malloc((words_count + 1) * sizeof(char *));
 	if (!strs)
 		return (NULL);
@@ -82,11 +91,11 @@ char	**ft_split(char const *s, char c)
 	s_index = 0;
 	while (i < words_count)
 	{
-		next_word_len = ft_next_word_len(s, &s_index, c);
+		next_word_len = ft_next_word_len(s, &s_index, sep);
 		strs[i] = ft_substr(s, s_index - next_word_len, next_word_len);
 		if (!strs[i])
 		{
-			free_2d_arr(strs, i);
+			free_2d_arr(strs);
 			return (NULL);
 		}
 		i++;
