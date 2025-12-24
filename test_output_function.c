@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:10:19 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/22 04:12:16 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/22 21:02:24 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_lstshow(t_list *lst)
 	while (lst)
 	{
 		ft_printf("element[%d]: %d\n", ++i, lst->content);
-		ft_printf("target_node: %d\n", lst->target->content);
+		// ft_printf("target_node: %d\n", lst->target->content);
 		lst = lst->next;
 	}
 }

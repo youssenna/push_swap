@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 09:25:41 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/22 06:49:21 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/23 19:11:54 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ t_list *find_bigger_smallest_node(t_list *src_node, t_list *stack)
 	on stack a if not found it ;
 	- the target node will be the smallest content on stack a.
 */
+
 void	ft_find_targets_node(t_list *stack_a, t_list **stack_b)
 {
 	t_list	*tmp;
@@ -130,7 +131,7 @@ void	ft_calculate_top_cost(t_list *stack_a, t_list *stack_b)
 			tmp->cost_b = stack_b_size - tmp->index;
 		if (tmp->target->index <= stack_a_size / 2)
 			tmp->cost_a = tmp->target->index;
-		else 
+		else
 			tmp->cost_a = stack_a_size - tmp->target->index;
 		tmp->total_cost = tmp->cost_a + tmp->cost_b;
 		tmp = tmp->next;
@@ -152,36 +153,98 @@ t_list	*find_min_moves(t_list *stack)
 }
 
 // I will applic the movements here 
-void	ft_move(t_list *target, t_list **stack_a, t_list **stack_b)
+void	ft_move(t_list *target_mov, t_list **stack_a, t_list **stack_b)
 {
 	
+	int	stack_a_size;
+	int	stack_b_size;
+	int	i;
+
+	stack_a_size = ft_lstsize(*stack_a);
+	stack_b_size = ft_lstsize(*stack_b);
+	if (target_mov->index <= stack_b_size / 2)
+	{
+		i = 0;
+		while (i < target_mov->index)
+		{
+			ra_rb_rr(NULL, stack_b);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < stack_b_size - target_mov->index)
+		{
+			rra_rrb_rrr(NULL, stack_b);
+			i++;
+		}
+	}
+	if (target_mov->target->index <= stack_a_size / 2)
+	{
+		i = 0;
+		while (i < target_mov->target->index)
+		{
+			ra_rb_rr(stack_a, NULL);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < stack_a_size - target_mov->target->index)
+		{
+			rra_rrb_rrr(stack_a, NULL);
+			i++;
+		}
+	}
+	pa_pb(stack_a, stack_b, "pa");
+}
+
+void	ft_mov_small_node_to_top(t_list *target, t_list **stack_a)
+{
+	int		stack_a_size;
+	int		i;
+
+	stack_a_size = ft_lstsize(*stack_a);
+	if (target->index <= stack_a_size / 2)
+	{
+		i = 0;
+		while (i < target->index)
+		{
+			ra_rb_rr(stack_a, NULL);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < stack_a_size - target->index)
+		{
+			rra_rrb_rrr(stack_a, NULL);
+			i++;
+		}
+	}
 }
 
 void	ft_sort_stack_a(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*target_moves;
-	int		stack_a_size;
-	int		stack_b_size;
 
-	stack_a_size = ft_lstsize(stack_a);
-	stack_b_size = ft_lstsize(stack_b);
 	*stack_b = NULL;
 	while (ft_lstsize(*stack_a) > 3)
 		pa_pb(stack_a, stack_b, "pb");
 	ft_sort_remaining_a(stack_a);
 	if (ft_lstsize(*stack_a) <= 3 && ft_lstsize(*stack_b) == 0)
 		return ;
-	while (stack_b)
+	while (*stack_b)
 	{
 		ft_find_targets_node(*stack_a, stack_b);
 		ft_calculate_top_cost(*stack_a, *stack_b);
-		target_moves = find_min_moves(stack_b);
+		target_moves = find_min_moves(*stack_b);
 		ft_move(target_moves, stack_a, stack_b);
 	}
-	// ft_printf("\n-------stack a----\n");
-	// ft_lstshow(*stack_a);
-	// ft_printf("\n-------stack b----\n");
-	// ft_lstshow(*stack_b);
+	ft_mov_small_node_to_top(find_small_node(*stack_a), stack_a);
 }
 
 //  5 3 1 2 9 6
@@ -195,9 +258,11 @@ void	ft_sort_stack_a(t_list **stack_a, t_list **stack_b)
 // disp stack_a->next->next->content
 // disp stack_b->content
 // disp stack_b->next->content
-// disp stack_b->next->next->content
+// disp stack_b->next->next->next->content
 // disp tmp->content
 // disp tmp->target->content
 // disp tmp->target->index
 // disp tmp->cost_b
 // disp tmp->cost_a
+
+

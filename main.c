@@ -90,6 +90,7 @@ int main(int ac, char **av)
 	// ft_sort_stack_a(&stack_a, &stack_b);
 	// ft_printf("\n------stack a after sort 3 number-----------\n");
 	// ft_lstshow(stack_a);
+		ft_lstclear(&stack_a);
 		
 	}
 	return (0);

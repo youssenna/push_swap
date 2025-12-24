@@ -16,7 +16,7 @@ define pstack
       set $current = $current->next
       set $index = $index + 1
     end
-    printf "╚════════════════════╝\n\n"
+    printf "╚════════════════╝\n\n"
   end
 end
 
