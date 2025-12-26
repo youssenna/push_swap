@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/26 20:08:13 by yousenna          #+#    #+#             */
+/*   Updated: 2025/12/26 20:12:07 by yousenna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
@@ -54,17 +66,17 @@ int	ft_push_back(char **ints, t_list **head)
 
 int	ft_check_is_valid_input(int ac, char **av, t_list **head)
 {
-	int	i;
+	int		i;
 	char	**ints;
 
 	i = 0;
 	while (i < ac - 1)
 	{
-		ints = ft_split(av[i + 1], " \t\n\v\f\r");
+		ints = ft_split(av[i + 1], " ");
 		if (!ints || !ints[0])
 			return (ft_lstclear(head), free(ints), 0);
 		if (!ft_push_back(ints, head))
-			return (free_2d_arr(ints) ,0);
+			return (free_2d_arr(ints), 0);
 		if (ft_check_repeat(*head))
 			return (free_2d_arr(ints), 0);
 		free_2d_arr(ints);
@@ -73,33 +85,33 @@ int	ft_check_is_valid_input(int ac, char **av, t_list **head)
 	return (1);
 }
 
-int main(int ac, char **av)
+int	ft_is_sorted(t_list *stack)
 {
-	t_list *stack_a;
-	t_list *stack_b;
+	if (!stack || !(stack->next))
+		return (1);
+	while (stack->next)
+	{
+		if (stack->content > stack->next->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+int	main(int ac, char **av)
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
 
 	stack_a = NULL;
 	if (ac > 1)
 	{
 		if (!ft_check_is_valid_input(ac, av, &stack_a))
 			return (ft_putstr_fd("Error\n", 2), (1));
-
+		if (ft_is_sorted(stack_a))
+			return (0);
 		ft_sort_stack_a(&stack_a, &stack_b);
-	// ft_printf("\n------stack a-----------\n");
-	// ft_lstshow(stack_a);
-	// ft_sort_stack_a(&stack_a, &stack_b);
-	// ft_printf("\n------stack a after sort 3 number-----------\n");
-	// ft_lstshow(stack_a);
 		ft_lstclear(&stack_a);
-		
 	}
 	return (0);
 }
-
-
-// a.out " 25 762 836" "   187" " 98 38 -97"
-
-// a 
-// 3 1 2
-
-// b 2 1 -3
