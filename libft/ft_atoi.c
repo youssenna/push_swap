@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/18 21:38:53 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/17 10:08:00 by yousenna         ###   ########.fr       */
+/*   Created: 2025/12/27 12:36:42 by yousenna          #+#    #+#             */
+/*   Updated: 2025/12/27 12:36:45 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_check_is_valid_int(const char *str, int i, long *result, int *is_valid)
+void	ft_is_valid_int(const char *str, int i, long *result, int *is_valid)
 {
 	int	digit_start;
-	
+
 	digit_start = i;
 	*is_valid = 1;
 	while (str[i] >= '0' && str[i] <= '9')
@@ -32,7 +32,7 @@ long	ft_atoi(const char *str, int *is_valid_int)
 	long	result;
 	int		sign;
 	int		i;
-	
+
 	i = 0;
 	if (!str)
 		return (0);
@@ -50,7 +50,7 @@ long	ft_atoi(const char *str, int *is_valid_int)
 	}
 	if (str[i] == '\0')
 		return (*is_valid_int = 0, 0);
-	ft_check_is_valid_int(str, i, &result, is_valid_int);
+	ft_is_valid_int(str, i, &result, is_valid_int);
 	if (sign * result > 2147483647 || sign * result < -2147483648)
 		*is_valid_int = 0;
 	return (sign * result);

@@ -6,7 +6,7 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 13:23:53 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/26 18:33:21 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/27 13:06:46 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_is_2char_equal(char c1, char *str)
 		return (1);
 	return (0);
 }
-
 
 size_t	ft_count_words(char const *str, char *sep)
 {

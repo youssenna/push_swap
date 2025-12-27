@@ -6,12 +6,10 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:19:27 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/17 18:49:20 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/27 12:51:36 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
 #include "push_swap.h"
 
 int	swap_2_top_elem(t_list **head)
@@ -20,15 +18,16 @@ int	swap_2_top_elem(t_list **head)
 	t_list	*third_node;
 
 	if (!head || !(*head)->next)
-		return 0;
+		return (0);
 	tmp = *head;
 	third_node = (*head)->next->next;
 	*head = (*head)->next;
 	(*head)->next = tmp;
 	tmp->next = third_node;
-	return 1;
+	return (1);
 }
 
+// this function work is sa sb ss operations 
 void	sa_sb_ss(t_list **a, t_list **b)
 {
 	if (!b)
@@ -48,6 +47,7 @@ void	sa_sb_ss(t_list **a, t_list **b)
 	}
 }
 
+// this function work is pa and pb operations 
 void	pa_pb(t_list **a, t_list **b, char *op)
 {
 	t_list	*tmp;
@@ -60,7 +60,7 @@ void	pa_pb(t_list **a, t_list **b, char *op)
 			*b = (*b)->next;
 			tmp->next = *a;
 			*a = tmp;
-			ft_putendl_fd("pa", 1);		
+			ft_putendl_fd("pa", 1);
 		}
 	}
 	else if (!ft_strncmp(op, "pb", 2))
@@ -71,7 +71,7 @@ void	pa_pb(t_list **a, t_list **b, char *op)
 			*a = (*a)->next;
 			tmp->next = *b;
 			*b = tmp;
-			ft_putendl_fd("pb", 1);		
+			ft_putendl_fd("pb", 1);
 		}
 	}
 }
@@ -79,18 +79,19 @@ void	pa_pb(t_list **a, t_list **b, char *op)
 int	rotate(t_list **head)
 {
 	t_list	*tmp;
-	
+
 	if (!head || !(*head)->next)
-		return 0;
+		return (0);
 	tmp = *head;
 	while ((*head)->next)
 		*head = (*head)->next;
 	(*head)->next = tmp;
 	*head = tmp->next;
 	tmp->next = NULL;
-	return (1);	
+	return (1);
 }
 
+// this function work is ra rb rr operations 
 void	ra_rb_rr(t_list **a, t_list **b)
 {
 	if (!b)

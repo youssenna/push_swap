@@ -6,13 +6,11 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 20:08:13 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/26 20:12:07 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/27 12:21:50 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
 
 int	ft_check_repeat(t_list *head)
 {
