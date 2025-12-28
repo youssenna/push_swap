@@ -107,9 +107,10 @@ int	main(int ac, char **av)
 		if (!ft_check_is_valid_input(ac, av, &stack_a))
 			return (ft_putstr_fd("Error\n", 2), (1));
 		if (ft_is_sorted(stack_a))
-			return (0);
+			return (ft_lstclear(&stack_a), 0);
 		ft_sort_stack_a(&stack_a, &stack_b);
 		ft_lstclear(&stack_a);
+		ft_lstclear(&stack_b);
 	}
 	return (0);
 }
