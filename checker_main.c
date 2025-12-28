@@ -113,6 +113,7 @@ int	main(int ac, char **av)
 		else
 			ft_putendl_fd("KO", 1);
 		ft_lstclear(&stack_a);
+		ft_lstclear(&stack_b);
 	}
 	return (0);
 }
