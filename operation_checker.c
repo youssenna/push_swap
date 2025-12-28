@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.c                                        :+:      :+:    :+:   */
+/*   operation_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 11:19:27 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/28 03:10:19 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/27 23:37:58 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// this operations it's of mondatory part
 
 int	swap_2_top_elem(t_list **head)
 {
@@ -32,20 +30,16 @@ int	swap_2_top_elem(t_list **head)
 // this function work is sa sb ss operations 
 void	sa_sb_ss(t_list **a, t_list **b)
 {
+	// if ((!b && !a) || (!(*a)->next && !(*b)->next))
+		// return ;
 	if (!b)
-	{
-		if (swap_2_top_elem(a))
-			ft_putendl_fd("sa", 1);
-	}
+		swap_2_top_elem(a);
 	else if (!a)
-	{
-		if (swap_2_top_elem(b))
-			ft_putendl_fd("sb", 1);
-	}
+		swap_2_top_elem(b);
 	else
 	{
-		if (swap_2_top_elem(a) && swap_2_top_elem(b))
-			ft_putendl_fd("ss", 1);
+		swap_2_top_elem(a);
+		swap_2_top_elem(b);
 	}
 }
 
@@ -62,7 +56,6 @@ void	pa_pb(t_list **a, t_list **b, char *op)
 			*b = (*b)->next;
 			tmp->next = *a;
 			*a = tmp;
-			ft_putendl_fd("pa", 1);
 		}
 	}
 	else if (!ft_strncmp(op, "pb", 2))
@@ -73,7 +66,6 @@ void	pa_pb(t_list **a, t_list **b, char *op)
 			*a = (*a)->next;
 			tmp->next = *b;
 			*b = tmp;
-			ft_putendl_fd("pb", 1);
 		}
 	}
 }
@@ -97,18 +89,12 @@ int	rotate(t_list **head)
 void	ra_rb_rr(t_list **a, t_list **b)
 {
 	if (!b)
-	{
-		if (rotate(a))
-			ft_putendl_fd("ra", 1);
-	}
+		rotate(a);
 	else if (!a)
-	{
-		if (rotate(b))
-			ft_putendl_fd("rb", 1);
-	}
+		rotate(b);
 	else
 	{
-		if (rotate(a) && rotate(b))
-			ft_putendl_fd("rr", 1);
+		rotate(a);
+		rotate(b);
 	}
 }

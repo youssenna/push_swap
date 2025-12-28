@@ -6,14 +6,14 @@
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 12:25:43 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/27 13:53:10 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/27 15:50:19 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 // this function you will find it on operation.c
 // and operation2.c file 

@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation2.c                                       :+:      :+:    :+:   */
+/*   operation2_checker.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yousenna <yousenna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:25:22 by yousenna          #+#    #+#             */
-/*   Updated: 2025/12/28 03:10:08 by yousenna         ###   ########.fr       */
+/*   Updated: 2025/12/27 23:40:59 by yousenna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// this operations it's of mondatory part
 
 int	reverse_rotate(t_list **head)
 {
@@ -35,18 +33,12 @@ int	reverse_rotate(t_list **head)
 void	rra_rrb_rrr(t_list **a, t_list **b)
 {
 	if (!b)
-	{
-		if (reverse_rotate(a))
-			ft_putendl_fd("rra", 1);
-	}
+		reverse_rotate(a);
 	else if (!a)
-	{
-		if (reverse_rotate(b))
-			ft_putendl_fd("rrb", 1);
-	}
+		reverse_rotate(b);
 	else
 	{
-		if (reverse_rotate(a) && reverse_rotate(b))
-			ft_putendl_fd("rrr", 1);
+		reverse_rotate(a);
+		reverse_rotate(b);
 	}
 }
